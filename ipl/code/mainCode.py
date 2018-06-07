@@ -2,6 +2,11 @@ import sqlite3 as db
 
 import numpy as np
 import pandas as pd
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))))
+
+dbPath = os.path.join(BASE_DIR, 'ipl.sqlite3')
 
 
 def pickPlayers(playerList, numOfPlayers, finalTeam):
@@ -93,7 +98,7 @@ def selectPlayers(num, ptype, overseas, success, finalTeam):
 
     # Open the database
     try:
-        conn = db.connect('/home/lneeraj97/Documents/mysite/ipl.sqlite3')
+        conn = db.connect(dbPath)
         cur = conn.cursor()
         cur.execute("SELECT * FROM Player_Score WHERE (Total_Score>200 AND Success BETWEEN {0} AND {1}) AND Type={2} AND Overseas={3} ORDER BY Total_Score DESC,Success DESC ".format(
             successMin, successMax, ptype, overseas))

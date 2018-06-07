@@ -2,10 +2,14 @@ import sqlite3 as db
 
 import numpy as np
 import pandas as pd
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))))
+dbPath = os.path.join(BASE_DIR, 'ipl.sqlite3')
 
 
 def extractPlayers():
-    conn = db.connect('/home/lneeraj97/Documents/mysite/ipl.sqlite3')
+    conn = db.connect(dbPath)
     cur = conn.cursor()
     names = ['Player_Id', 'Player_Name', 'Type']
     cur.execute('SELECT Player_Id,Player_Name,Type from Player_Score')
@@ -16,7 +20,7 @@ def extractPlayers():
 
 def predictSuccess(playerList):
     names = ['Player_Id', 'Avg_Score', 'Success']
-    conn = db.connect('/home/lneeraj97/Documents/mysite/ipl.sqlite3')
+    conn = db.connect(dbPath)
     cur = conn.cursor()
     args = playerList
     sql = 'SELECT Player_Id, Avg_Score, Success FROM Player_Score WHERE Player_Id IN ({seq})'.format(
@@ -29,5 +33,6 @@ def predictSuccess(playerList):
     return successRate
 
 
-# extractPlayers()
-# predictSuccess([147, 175, 310, 38, 31, 255, 40, 333, 79, 151, 244])
+""" extractPlayers()
+predictSuccess([147, 175, 310, 38, 31, 255, 40, 333, 79, 151, 244])
+ """
