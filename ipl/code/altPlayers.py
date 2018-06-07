@@ -2,12 +2,19 @@ import sqlite3 as db
 
 import numpy as np
 import pandas as pd
+import os
+# from django.conf import settings
+BASE_DIR = os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))))
+dbPath = os.path.join(BASE_DIR, 'ipl.sqlite3')
 
 
 def getAltPlayer(playerList, playerId):
     altFor = playerId
     # Open Database
-    conn = db.connect('/home/lneeraj97/Documents/mysite/ipl.sqlite3')
+
+    # print(dbPath)
+    conn = db.connect(dbPath)
     cur = conn.cursor()
     cur.execute(
         'SELECT * FROM Player_Score WHERE Player_Id={pid}'.format(pid=altFor))
