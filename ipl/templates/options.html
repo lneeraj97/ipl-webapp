@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% block head%}
+<title>Pick Players</title>
+<style>
+    /*Creates table with scrollable tbody*/
+
+    tbody {
+        display: block;
+        height: 80vh;
+        overflow: auto;
+    }
+
+    thead,
+    tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    thead {
+        width: calc( 100% - 1em)
+    }
+
+    table {
+        width: 100%;
+    }
+
+    .bottomfix {
+        position: relative;
+        bottom: 20px;
+        top: 70vh;
+        float: right;
+    }
+</style>
+{%endblock%} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col s9 black-text">
+            {{playersDF.to_html|safe}}
+        </div>
+        <div class="col s3 bottomfix">
+            <form action="{predict}" method="POST">
+                {% csrf_token %}
+                <label for="pickedPlayers">Enter 11 Player IDs</label>
+                <textarea name="pickedPlayers" cols="50" rows="20"></textarea>
+                <button class="btn waves-effect waves-light white-text" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

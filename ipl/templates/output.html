@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block head%}
+<title>Recommended Team</title>
+{%endblock%} {% block content%}
+<div class="container">
+    <div class="row">
+        {%for index,row in playerTable.iterrows %}
+        <div class="col s12 m6 hoverable">
+
+            <div class="card blue-grey">
+                <div class="card-content white-text">
+                    <span class="card-title">{{row.1}} </span>
+                    <span>Player Id : {{row.0}}</span>
+                    <p>Total Score : {{row.2}}</p>
+                    <p>Average Score : {{row.3}}</p>
+                    <p>Success : {{row.4}}</p>
+                    <p>Type : {%if row.5 == 1 %} Batsmen {% elif row.5 == 2%} Bowler {%else %} Allrounder {%endif%}</p>
+                    <p>Nationality : {%if row.9 == 0%} Indian {% elif row.9 == 1 %}Overseas {%endif%} </p>
+                </div>
+            </div>
+        </div>
+        {%endfor%} {% comment %} {{playerTable.to_html|safe}} {% endcomment %}
+
+    </div>
+
+    <div class="row center-align">
+        <a href="{alternatives}">
+            <button class="btn waves-effect waves-notransition" type="submit" name="action">Get Alternate Players</button>
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block head%}
+<title>Requirements</title>
+{%endblock%} {% block content %}
+
+<div class="container">
+    <div class="card z-depth-5 myclass">
+
+        <h2 class="center-align">Your Requirements</h2>
+        <form action="" method="POST">
+
+            <div class="row">
+                {% csrf_token %} {% for field in form %}
+                <div class="col s4">
+                    <div class="input-field">
+                        {{ field.errors}} {{field.label_tag}} {{field}} {% if field.help_text %}
+                        <p class="help">{{field.help_text | safe}} </p>
+                        {% endif %}
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+
+            <div class="row center-align white-text">
+
+                <button class="btn waves-effect waves-light white-text" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

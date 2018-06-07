@@ -1,0 +1,31 @@
+{% extends 'base.html'%} {% block head%}
+<title>Charts</title>
+{%endblock%} {% block extrahead%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script> {% comment %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"> {% endcomment %}
+</script> {%endblock%} {%block content%}
+
+<canvas id="myChart" width="500" height="800"></canvas>
+<script>
+    function drawChart() {
+        var data = {
+            labels: ['a', 'b', 'c', 'd', 'e'],
+            datasets: [
+                {
+                    label: "Sample Graph",
+                    data: [23, 22, 67, 49, 87],
+                    fillColor: "rgba(220,220,220,0.2)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+
+                }
+            ],
+            options: {}
+        }
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var myLineChart = new Chart(ctx).Line(data);
+    }
+</script> {%endblock%}
