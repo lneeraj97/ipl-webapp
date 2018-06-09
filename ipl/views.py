@@ -1,7 +1,7 @@
 import pandas as pd
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
-
+from django.contrib import messages
 from .code.mainCode import getPlayers, pickPlayers, selectPlayers
 from .forms import InputForm, OptionsForm
 from .models import PlayerMatchComplete, PlayerMatchScore, PlayerScore
@@ -84,16 +84,13 @@ def predict(request):
     playerIds = request.POST.get('pickedPlayers').split(',')
     # print(playerIds)
     success = predictSuccess(playerIds)
+    request.session['playerTable'] = playerIds
+    # messages.info(
+    # request, "The probability of your team's success is {0} %".format(success))
     return render(request, 'success.html', {'success': success})
 
 
 def charts(request):
     playerList = request.session['playerTable']
-    scoresList = []
-    for player in playerList:
-        scoresList.append(getScoresList(player))
-    # scores = zip(playerList, scoresList)
-    # print(type(scoresList))
-    labels = list(range(1, 150))
-    mydata = {'labels': labels, 'label': playerList, 'df': scoresList}
-    return render(request, 'charts.html', mydata)
+    reqData = getScoresList(playerList)
+    return render(request, 'charts.html', {'mydata': reqData})

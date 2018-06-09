@@ -1,31 +1,36 @@
 {% extends 'base.html'%} {% block head%}
 <title>Charts</title>
 {%endblock%} {% block extrahead%}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script> {% comment %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"> {% endcomment %}
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load("current", {
+        packages: ["line"]
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        //Add data here
+        var djangoData = {{mydata | safe}};
+        var data = google.visualization.arrayToDataTable(djangoData, false);
+        //End data
+        var options = {
+            chart: {
+                title: "Player Performance in IPL",
+                subtitle: "Score per Match",
+            },
+            'width': 1080,
+            'height': 900,
+        };
+        var container = document.getElementById("container");
+        var chart = new google.charts.Line(container);
+        chart.draw(data, google.charts.Line.convertOptions(options));
+    }
 </script> {%endblock%} {%block content%}
 
-<canvas id="myChart" width="500" height="800"></canvas>
-<script>
-    function drawChart() {
-        var data = {
-            labels: ['a', 'b', 'c', 'd', 'e'],
-            datasets: [
-                {
-                    label: "Sample Graph",
-                    data: [23, 22, 67, 49, 87],
-                    fillColor: "rgba(220,220,220,0.2)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
+<div style="padding: 3% 0 0 7%">
+    <div id="container"></div>
+</div>
 
-                }
-            ],
-            options: {}
-        }
-        var ctx = document.getElementById("myChart").getContext("2d");
-        var myLineChart = new Chart(ctx).Line(data);
-    }
-</script> {%endblock%}
+
+{%endblock%}

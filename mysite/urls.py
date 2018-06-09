@@ -16,14 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from ipl import views
-import os
-from mysite.settings import BASE_DIR
-file_path = os.path.join(BASE_DIR, '')
-print(file_path)
+from django.conf.urls import url
+
 
 urlpatterns = [
-    path(r'^$', views.home),
+    # url('', views.home, name='home'),
+    # url(r'^$', views.home),
     path('admin/', admin.site.urls),
     path('ipl', include('ipl.urls')),
-
 ]

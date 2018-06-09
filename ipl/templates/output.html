@@ -6,8 +6,8 @@
         {%for index,row in playerTable.iterrows %}
         <div class="col s12 m6 hoverable">
 
-            <div class="card blue-grey">
-                <div class="card-content white-text">
+            <div class="card white">
+                <div class="card-content black-text">
                     <span class="card-title">{{row.1}} </span>
                     <span>Player Id : {{row.0}}</span>
                     <p>Total Score : {{row.2}}</p>
@@ -22,10 +22,19 @@
 
     </div>
 
-    <div class="row center-align">
-        <a href="{alternatives}">
-            <button class="btn waves-effect waves-notransition" type="submit" name="action">Get Alternate Players</button>
-        </a>
+    <div class="row">
+        <div class="col s12 m6 hoverable right-align">
+            <a href="{alternatives}">
+                <button class="btn waves-effect white black-text" type="submit" name="action">Get Alternate Players</button>
+            </a>
+        </div>
+        <div class="col s12 m6 hoverable left-align">
+            <a href="{charts}">
+                <button class="btn waves-effect white black-text">View Charts</button>
+            </a>
+
+        </div>
+
     </div>
 </div>
 {% endblock %}
