@@ -5,13 +5,13 @@
 <div class="container">
     <div class="card z-depth-5 myclass">
 
-        <h2 class="center-align">Your Requirements</h2>
-        <form action="" method="POST">
+        <h2 class="center-align black-text">Your Requirements</h2>
+        <form action="" method="POST" onsubmit="return checkCount();">
 
             <div class="row">
                 {% csrf_token %} {% for field in form %}
                 <div class="col s4">
-                    <div class="input-field">
+                    <div class="input-field black-text">
                         {{ field.errors}} {{field.label_tag}} {{field}} {% if field.help_text %}
                         <p class="help">{{field.help_text | safe}} </p>
                         {% endif %}

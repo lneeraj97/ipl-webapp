@@ -26,7 +26,7 @@ SECRET_KEY = 't872^(=ges$s%y78clu0(x7-!o)&e26q@#bx*-%erh=&9i7-#q'
 DEBUG = True
 
 ALLOWED_HOSTS = ['lneeraj97.pythonanywhere.com',
-                 '127.0.0.1', 'localhost']
+                 '127.0.0.1', 'localhost','*']
 
 
 # Application definition

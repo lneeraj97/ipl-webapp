@@ -1,6 +1,12 @@
 .myclass{
  padding: 5% 
 }
+body{
+    background: url('../images/batman.jpg') no-repeat center center fixed; 
+    background-size: cover;
+  	color: white;
+    background-position: bottom;
+}
 /* tbody {
         display: block;
         height: 80vh;

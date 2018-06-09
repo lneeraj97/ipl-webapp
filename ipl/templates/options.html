@@ -5,7 +5,7 @@
 
     tbody {
         display: block;
-        height: 80vh;
+        height: 74vh;
         overflow: auto;
     }
 
@@ -25,9 +25,9 @@
     }
 
     .bottomfix {
-        position: relative;
-        bottom: 20px;
-        top: 70vh;
+        position: sticky;
+        bottom: 0px;
+        top: 60vh;
         float: right;
     }
 </style>
@@ -35,17 +35,25 @@
 <div class="container">
     <div class="row">
         <div class="col s9 black-text">
-            {{playersDF.to_html|safe}}
+            <div class="card grey lighten-5">
+
+                {{playersDF.to_html|safe}}
+            </div>
         </div>
+
         <div class="col s3 bottomfix">
-            <form action="{predict}" method="POST">
-                {% csrf_token %}
-                <label for="pickedPlayers">Enter 11 Player IDs</label>
-                <textarea name="pickedPlayers" cols="50" rows="20"></textarea>
-                <button class="btn waves-effect waves-light white-text" type="submit" name="action">Submit
-                    <i class="material-icons right">send</i>
-                </button>
-            </form>
+            <div class="card transparent hoverable">
+                <form action="{predict}" method="POST" onsubmit="return checkLength();">
+                    {% csrf_token %}
+                    <div class="input-field">
+                        <label for="pickedPlayers">Enter 11 Player IDs</label>
+                        <textarea name="pickedPlayers" id="pickedPlayers" cols="50" rows="20"></textarea>
+                    </div>
+                    <button class="btn waves-effect waves-light white-text" type="submit" name="action">Submit
+                        <i class="material-icons right">send</i>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

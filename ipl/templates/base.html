@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static%}
 
 <head>
     {% block head %}
+    <link rel="icon" href="{% static " images/favicon.png " %}" type="image/png" sizes="16x16">
     <title>Title of the document</title>
     {% endblock %}
     <!-- Material Icon CDN -->
@@ -10,7 +12,9 @@
     <!-- Materialize CSS CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <!-- Your custom styles -->
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/validation.js' %}"></script>
+
     <!-- Used as an example only to position the footer at the end of the page.
     You can delete these styles or move it to your custom css file -->
     <style>
@@ -18,65 +22,49 @@
             display: flex;
             min-height: 100vh;
             flex-direction: column;
+            background: url('{% static "images/0.jpg" %}') no-repeat center center fixed;
+            background-size: cover;
+            background-position: bottom;
+
         }
 
         main {
             flex: 1 0 auto;
+
         }
     </style>
     {%block extrahead %} {%endblock%}
 </head>
 
-<body onload="drawChart">
+<body>
     <header>
-        <nav class="blue-grey darken-4">
-            <div class="nav-wrapper">
-                <div class="container">
-                    <a href="{home} " class="brand-logo">Team Recommender</a>
-                    <a href="{home} " data-activates="mobile-menu" class="button-collapse">
-                        <i class="material-icons">menu</i>
-                    </a>
-                    <ul class="right hide-on-med-and-down">
-                        <li>
-                            <a href="{input} ">Pick Team</a>
-                        </li>
-                        <li>
-                            <a href="{options} ">Know Success</a>
-                        </li>
-                        <li>
-                            <a href="{charts}">Charts</a>
-                        </li>
+        <nav class="transparent">
 
-                    </ul>
-                    <ul class="side-nav" id="mobile-menu">
-                        <li>
-                            <div class="userView">
-                                <div class="background">
-                                    <img src="http://lorempixel.com/output/abstract-q-c-640-480-10.jpg" alt="Background Sidenav">
-                                </div>
-                                <a href="#!user">
-                                    <img class="circle" src="http://lorempixel.com/output/people-q-c-640-480-9.jpg" alt="User Image Sidenav">
-                                </a>
-                                <a href="#!name">
-                                    <span class="white-text name">John Doe</span>
-                                </a>
-                                <a href="#!email">
-                                    <span class="white-text email">jdandturk@gmail.com</span>
-                                </a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="{input} ">Pick Team</a>
-                        </li>
-                        <li>
-                            <a href="{options} ">Know Success</a>
-                        </li>
-                        <li>
-                            <a href="{charts}">Charts</a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="nav-wrapper">
+                <a href="{home} " class="">
+                    <img src='{% static "images/logo.png"%}' size="200x200">
+                </a>
+
+                {% comment %}
+                <a href="{home} " class="brand-logo white-text">Team Recommender</a> {% endcomment %}
+                <a href="{home} " data-activates="mobile-menu" class="button-collapse">
+                    <i class="material-icons black-text">menu</i>
+                </a>
+                <ul class="right hide-on-med-and-down">
+                    <li class="black-text">
+                        <a href="{input} " class="black-text">Pick Team</a>
+                    </li>
+                    <li>
+                        <a href="{options} " class="black-text">Know Success</a>
+                    </li>
+                    <li>
+                        <a href="{charts}" class="black-text">Charts</a>
+                    </li>
+
+                </ul>
+
             </div>
+
         </nav>
     </header>
     <main>
